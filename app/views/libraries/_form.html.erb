@@ -1,0 +1,55 @@
+<%= form_for(@library) do |f| %>
+  <% if @library.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@library.errors.count, "error") %> prohibited this library from being saved:</h2>
+
+      <ul>
+      <% @library.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+
+ 
+  <div class="field">
+    <%= f.label :shelf %><br />
+    <%= f.number_field :shelf %>
+  </div>
+  <div class="field">
+    <%= f.label :book %><br />
+    <%= f.text_field :book %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<%end%>
+  
+class Shelf
+  attr_accessor :shelfnumber 
+  def initialize(attributes = {})
+  @shelfnumber = attributes[:shelfnumber]
+end
+
+class Book
+  attr_accessor :enshelf, unshelf
+  def initialize(attributes = {})
+  @enshelf = attributes[:shelfnumber]
+  @unshelf = attributes[{}]
+end
+
+class Library
+  attr_accessor :shelf, :book
+
+  def initialize(attributes = {})
+  @shelf = attributes[:shelf]
+  @book = attributes[:book]
+
+  end
+
+  def formatted_library
+    "#{@shelf} <{#@book}>"
+  end
+end
+<% end %>
